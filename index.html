@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>iQtest</title>
+	<title>iqtest</title>
 	<meta charset="utf-8">
     <meta name="description" content="Cover test iQ Mensa Denmark">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,111 +19,131 @@
 
 <style type="text/css">
 
-
-
 *{ 
 	font-family: sans-serif; 
 	margin: 0; 
-	padding: 0
-	}
+	padding: 0;
+	outline: none;
+	cursor: default !important;
+	  -webkit-touch-callout: none; /* iOS Safari */
+	    -webkit-user-select: none; /* Safari */
+	     -khtml-user-select: none; /* Konqueror HTML */
+	       -moz-user-select: none; /* Old versions of Firefox */
+	        -ms-user-select: none; /* Internet Explorer/Edge */
+	            user-select: none; /* Non-prefixed version, currently
+	                                  supported by Chrome, Edge, Opera and Firefox */
+									}
 
 	body{
 		background-color: hsl(260deg 100% 5%);
-		min-width: 800px !important;
-		color: white;
+		color: white
 		}
+		body > div{
+					padding-top: 60px; 
+					text-align: center
+					}
+					#result{
+							color: #ffd400
+							}
 
-	.testno{
-			font-size: 20px;
-			}
+		body::-webkit-scrollbar-thumb{ background: hsla( 0, 0%, 100%, .3 ) }
+		body::-webkit-scrollbar{
+							width: 12px;
+							background: transparent
+							}
 
-	.question{
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-			border-radius: 20px;
-			}
-
-
-	.item_button{
-				width: 42px;
-				height: 42px;
-				border-radius: 50%;
-				text-align: center;
-				line-height: 42px;
-				}
-				.answered{ color: #4a4a4a }
-				.selected{ background: #ffffff17 }
-
-
-	#row_numbers{
+	.bar{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 40px;
+		padding: 10px 20px;
+		font-size: 20px;
+		text-align: left;
+		color: #ffffff;
+		z-index: 1;
+		box-sizing: border-box;
+		}
+		.bar b{ font-size: 36px }
+		.bar b span{ font-family: serif; font-size: 1.2em }
+		.bar sub{ font-size: 12px; margin: 0 10px }
+		.buttom{
 				position: absolute;
-				width: 546px;
-				left: 50%;
-				margin-top: 180px;
-				margin-left: -273px
+				width: 60px;
+				height: 16px;
+				right: 20px;
+				padding: 10px 20px;
+				margin-top: 10px;
+				box-shadow: 0 2px 4px 0 #000000b5;
+				border-radius: 4px;
+				line-height: 14px;
+				font-size: 14px;
+				background: #fff;
+				color: #000;
+				text-align: center;
+				cursor: pointer !important
+				}
+				.buttom:active{
+								line-height: 16px;
+								margin-top: 11px;
+								font-size: 13px
+								}
+
+	#test_image{
+				width: 416px;
+				margin: 40px auto 20px auto;
+				border-radius: 20px;
+				box-shadow: 0px 1px 6px 0 black
 				}
 
 	#row_answer{
 				position: absolute;
-				width: 600px;
+				width: 430px;
 				left: 50%;
-				margin-left: -300px;
+				margin-left: -215px;
 				}
 
-	.option_answer{
-				float: left;
-				width: 25%;
-				margin: 20px 0;
+				.option_answer{
+							float: left;
+							width: 25%;
+							margin: 10px 0 0
+							}
+
+				.possible_answer{
+								height: 40px
+								}
+
+	#row_numbers{
+				position: absolute;
+				width: 429px;
+				left: 50%;
+				margin-top: 140px;
+				margin-left: -215px;
 				}
 
-	.option_number{
-				float: left;
-				}
+				.item_button{
+							width: 33px;
+							height: 33px;
+							border-radius: 50%;
+							text-align: center;
+							line-height: 33px;
+							font-size: 12px;
+							}
+							.answered{ color: #4a4a4a }
+							.selected{ background: #ffffff17 }
 
-	.finish{
-			background: #ffffff;
-			padding: 10px 0;
-			font-size: 20px;
-			cursor: pointer;
-			word-spacing: 20px;
-			position: absolute;
-			width: 600px;
-			width: 100%;
-			left: 0;
-			color: #000000;
-			z-index: 1;
-			text-align: center;
-			}
-
-	.time{
-		font-size: 20px;
-		color: #000000bd;
-		}
-
-	.possibleAnswer{
-					height: 50px;
-					}
-
-	.navigation_arrow{
-					width: 60px;
-					}
-
-#shape_principal{
-				margin: 40px auto 20px auto;
-				}
-
-.letra_name{
-			font-size: 12px;
-			margin-left: 4px;
-			color: #777
-			}
-
-.container{ padding-top: 60px; }
+				.option_number{
+							float: left
+							}
+				
+				.letra_name{
+							font-size: 12px;
+							margin-left: 4px;
+							color: #777
+							}
 
 </style>
-
-
 </head>
 
 
@@ -138,38 +158,42 @@
 <body>
 
 
-<div class="container" data-bind="visible: showContainer() == 0">
-																<div class="finish" data-bind="click: self.finish">
-																													<div data-bind="text: 'iQtest ' + minutes() + ':' + (seconds() < 10 ? '0' : '') + seconds() + ' finish'"></div>
-																													</div>
+<div data-bind="visible: showContainer() == 0">
+											<div class="bar">
+														<div><b><span>i</span>qtest</b><sub data-bind="text: minutes() + ':' + (seconds() < 10 ? '0' : '') + seconds()"></sub> <span class="buttom" data-bind="click: self.calculate">calculate</span></div>
+														</div>
 
-																<img id="shape_principal" src="shapes/q1.png" data-bind="attr:{src: 'shapes/q' + self.currentItem() + '.png'}" class="question img-responsive">
+											<img id="test_image" src="shapes/q1.png" data-bind="attr:{src: 'shapes/q' + self.currentItem() + '.png'}">
 
-																<div id="row_answer" data-bind="foreach: answers">
-																												<div class="option_answer">
-																												<img class="possibleAnswer" data-bind="click: self.answerQuestion, attr:{src: 'shapes/a' + self.currentItem() + '_' + item + '.png'}"><span class="letra_name" data-bind="text: name"></span>
-																												</div>
-																												</div>
+											<div id="row_answer" data-bind="foreach: answers">
+																							<div class="option_answer">
+																							<img class="possible_answer" data-bind="click: self.answerQuestion, attr:{src: 'shapes/a' + self.currentItem() + '_' + item + '.png'}">
+																							<span class="letra_name" data-bind="text: name"></span>
+																							</div>
+																							</div>
 
-																<div id="row_numbers" data-bind="foreach: answersGiven">
-																												<div class="option_number">
-																												<div class="item_button" data-bind="click: self.jumpToQuestion, css: { answered: answer != '', selected: item == self.currentItem() }, text: item + ' ' + answer">1</div>
-																												</div>
-																												</div>
-																												</div>
-
-
-<div class="container" data-bind="visible: self.showContainer() == 1">
-																	<div class="finish" data-bind="click: self.calculate"><div>Beregn</div></div>
-																	</div>
+											<div id="row_numbers" data-bind="foreach: answersGiven">
+																							<div class="option_number">
+																							<div class="item_button" data-bind="click: self.jumpToQuestion, css: { answered: answer != '', selected: item == self.currentItem() }, text: item + ' ' + answer">1</div>
+																							</div>
+																							</div>
+																							</div>
 
 
-<div class="container" data-bind="visible: self.showContainer() == 2">
-																	<p>Your IQ is calculated to be: <h2><b data-bind="text: self.answerText()">Ikke beregnet</b></h2></p>
-																	<p>Calculated using scatter 15</p>
-																	<img src="shapes/normalfordeling.png" class="img-responsive">
-																	<p>An IQ between 85 and 115 at spread 15 is within what is called the normal range. To become a member of Mensa, you must have an IQ of 131 or more at this spread.</p>
-																	</div>
+<div data-bind="visible: self.showContainer() == 2">
+											<div class="bar">
+														<div><b><span>i</span>qtest</b><sub>test cover mensa.dk by @hallneman</sub><span class="buttom" onclick="window.location.reload();">reload</span></div>
+														</div>
+
+											<img src="shapes/normalfordeling.png">
+											<h1 id="result"><span data-bind="text: self.answerText()"></span></h1>
+											<br>iQ calculated using scatter 15.
+											<br>An iQ between 85 and 115 at spread 15 is within what is called the normal range.
+											<br>To become a member of Mensa, you must have an IQ of 131 or more at this spread.
+											<br>
+											<br>
+											<sub>For-sjov testen på www.mensa.dk er baseret på IQtest.dk udviklet af Anders Ditlev Jensen,<br> MD. HTML-version af testen er udviklet af John V. B. Doktor.</sub>
+											</div>
 
 
 
